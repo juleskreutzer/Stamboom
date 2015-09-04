@@ -1,5 +1,6 @@
 package stamboom.domain;
 
+import java.lang.Integer;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -33,8 +34,14 @@ public class Persoon {
      */
     Persoon(int persNr, String[] vnamen, String anaam, String tvoegsel,
             Calendar gebdat, String gebplaats, Geslacht g, Gezin ouderlijkGezin) {
-        //todo opgave 1
-        throw new UnsupportedOperationException();
+        this.nr = persNr;
+        this.voornamen = vnamen;
+        this.achternaam = anaam;
+        this.tussenvoegsel = tvoegsel;
+        this.gebDat = gebDat;
+        this.gebPlaats = gebPlaats;
+        this.geslacht = g;
+        this.ouderlijkGezin = ouderlijkGezin;
     }
 
     // ********methoden****************************************
@@ -74,8 +81,14 @@ public class Persoon {
      * door een punt
      */
     public String getInitialen() {
-        //todo opgave 1
-        return null;
+        String result = "";
+        for(Integer i = 1, i < voornamen.length, ++i)
+        {
+            result = voornamen[i].substring(1,1);
+            result = result + ". ";
+        }
+
+        return result;
     }
 
     /**
@@ -85,8 +98,10 @@ public class Persoon {
      * gescheiden door een spatie
      */
     public String getNaam() {
-        //todo opgave 1
-        return null;
+        String result = "";
+        result = getInitialen() + tussenvoegsel + " " + achternaam;
+
+        return result;
     }
 
     /**
@@ -151,7 +166,14 @@ public class Persoon {
      * @return of ouderlijk gezin kon worden toegevoegd
      */
     boolean setOuders(Gezin ouderlijkGezin) {
-        //todo opgave 1
+        if(this.ouderlijkGezin != null)
+        {
+            this.ouderlijkGezin = ouderlijkGezin;
+            // OuderlijkGezin kan worden toegevoegd
+            return true;
+        }
+
+        // We gaan ervan uit dat geen ouderlijkGezin kon worden toegevoegd
         return false;
     }
 
