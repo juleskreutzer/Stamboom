@@ -37,9 +37,11 @@
       <file leaf-file-name="Gezin.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/stamboom/domain/Gezin.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8037518">
-              <caret line="212" column="23" selection-start-line="212" selection-start-column="23" selection-end-line="212" selection-end-column="23" />
+            <state vertical-scroll-proportion="0.6075036">
+              <caret line="275" column="36" selection-start-line="275" selection-start-column="36" selection-end-line="275" selection-end-column="36" />
               <folding>
+                <element signature="e#2933#2934#0" expanded="true" />
+                <element signature="e#3010#3011#0" expanded="true" />
                 <element signature="e#3116#3117#0" expanded="true" />
                 <element signature="e#3154#3155#0" expanded="true" />
                 <element signature="e#3243#3244#0" expanded="true" />
@@ -52,8 +54,8 @@
                 <element signature="e#4355#4356#0" expanded="true" />
                 <element signature="e#4469#4470#0" expanded="true" />
                 <element signature="e#4507#4508#0" expanded="true" />
-                <element signature="e#8630#8631#0" expanded="true" />
-                <element signature="e#8675#8676#0" expanded="true" />
+                <element signature="e#9083#9084#0" expanded="true" />
+                <element signature="e#9128#9129#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -127,6 +129,46 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Stamboom" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Stamboom" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Stamboom" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tst" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="stamboom" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Stamboom" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Stamboom" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tst" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="stamboom" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -355,6 +397,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+            <element signature="e#2933#2934#0" expanded="true" />
+            <element signature="e#3010#3011#0" expanded="true" />
             <element signature="e#3116#3117#0" expanded="true" />
             <element signature="e#3154#3155#0" expanded="true" />
             <element signature="e#3243#3244#0" expanded="true" />
@@ -367,8 +411,8 @@
             <element signature="e#4355#4356#0" expanded="true" />
             <element signature="e#4469#4470#0" expanded="true" />
             <element signature="e#4507#4508#0" expanded="true" />
-            <element signature="e#8630#8631#0" expanded="true" />
-            <element signature="e#8675#8676#0" expanded="true" />
+            <element signature="e#9083#9084#0" expanded="true" />
+            <element signature="e#9128#9129#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -390,9 +434,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/stamboom/domain/Gezin.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8037518">
-          <caret line="212" column="23" selection-start-line="212" selection-start-column="23" selection-end-line="212" selection-end-column="23" />
+        <state vertical-scroll-proportion="0.6075036">
+          <caret line="275" column="36" selection-start-line="275" selection-start-column="36" selection-end-line="275" selection-end-column="36" />
           <folding>
+            <element signature="e#2933#2934#0" expanded="true" />
+            <element signature="e#3010#3011#0" expanded="true" />
             <element signature="e#3116#3117#0" expanded="true" />
             <element signature="e#3154#3155#0" expanded="true" />
             <element signature="e#3243#3244#0" expanded="true" />
@@ -405,8 +451,8 @@
             <element signature="e#4355#4356#0" expanded="true" />
             <element signature="e#4469#4470#0" expanded="true" />
             <element signature="e#4507#4508#0" expanded="true" />
-            <element signature="e#8630#8631#0" expanded="true" />
-            <element signature="e#8675#8676#0" expanded="true" />
+            <element signature="e#9083#9084#0" expanded="true" />
+            <element signature="e#9128#9129#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -265,7 +265,19 @@ public class Gezin {
      * de ouders hierna gingen/gaan scheiden.
      */
     public boolean isHuwelijkOp(Calendar datum) {
-        //todo opgave 1
+        if (huwelijksdatum != null)
+        {
+            if (huwelijksdatum.get(huwelijksdatum.YEAR) <= datum.get(datum.YEAR))
+            {
+                if (huwelijksdatum.get(huwelijksdatum.MONTH) <= datum.get(datum.MONTH))
+                {
+                    if (huwelijksdatum.get(huwelijksdatum.DAY_OF_MONTH) <= datum.get(datum.DAY_OF_MONTH))
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
         return false;
     }
 
