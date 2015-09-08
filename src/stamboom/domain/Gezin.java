@@ -1,6 +1,10 @@
 package stamboom.domain;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.Calendar;
+
+import com.sun.javafx.scene.layout.region.Margins;
 import javafx.beans.property.LongProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.collections.FXCollections;
@@ -184,8 +188,29 @@ public class Gezin {
      * kinderen uit deze relatie (per kind voorafgegaan door ' -')
      */
     public String beschrijving() {
-        //todo opgave 1
-        return null;
+        String beschrijving = "";
+        String nummer = Integer.toString(nr);
+        String huwDatum = "Geen huwelijksdatum bekend.";
+        String kinders = "Geen kinderen";
+
+        if (huwelijksdatum != null)
+        {
+            SimpleDateFormat sdf = new SimpleDateFormat("DD/MM/YYYY");
+            /*Met sdf zou je zo een calendar format om kunnen zetten naar een string, met formaat dag/maand/jaar */
+            huwDatum = sdf.format(huwelijksdatum.getTime());
+        }
+
+        if (aantalKinderen() > 0)
+        {
+            kinders = "; kinderen:";
+            for (Persoon p : kinderen)
+            {
+                kinders = kinders + " -" + p.getNaam();
+            }
+        }
+
+        beschrijving = nummer + ", huwelijksdatum: " + huwDatum + " " + kinders;
+        return kinders;
     }
 
     /**
