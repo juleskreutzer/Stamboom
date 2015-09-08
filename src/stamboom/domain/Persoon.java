@@ -99,7 +99,7 @@ public class Persoon {
      */
     public String getNaam() {
         String result = "";
-        result = getInitialen() + tussenvoegsel + " " + achternaam;
+        result = getInitialen() + " " + tussenvoegsel + " " + achternaam;
 
         return result;
     }

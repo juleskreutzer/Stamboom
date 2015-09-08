@@ -169,7 +169,11 @@ public class Gezin {
      * @return false als huwelijk niet mocht worden voltrokken, anders true
      */
     boolean setHuwelijk(Calendar datum) {
-        //todo opgave 1
+        if (huwelijksdatum == null)
+        {
+            huwelijksdatum = datum;
+            return true;
+        }
         return false;
     }
 
