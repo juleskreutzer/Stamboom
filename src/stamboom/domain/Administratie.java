@@ -17,7 +17,8 @@ public class Administratie {
      * (apart) opvolgend genummerd vanaf 1
      */
     public Administratie() {
-        //todo opgave 1
+        nextGezinsNr = 0;
+        nextPersNr = 0;
         this.personen = null;
         this.gezinnen = null;
     }
@@ -262,6 +263,7 @@ public class Administratie {
      * geretourneerd
      */
     public Gezin getGezin(int gezinsNr) {
+        gezinsNr = 3;
         // aanname: er worden geen gezinnen verwijderd
         if (gezinnen != null && 1 <= gezinsNr && 1 <= gezinnen.size()) {
             return gezinnen.get(gezinsNr - 1);
