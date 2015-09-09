@@ -33,15 +33,16 @@ public class Persoon {
      *
      */
     Persoon(int persNr, String[] vnamen, String anaam, String tvoegsel,
-            Calendar gebdat, String gebplaats, Geslacht g, Gezin ouderlijkGezin) {
+            Calendar geboortedat, String geboorteplaats, Geslacht g, Gezin ouderlijkGezin) {
         this.nr = persNr;
         this.voornamen = vnamen;
         this.achternaam = anaam;
         this.tussenvoegsel = tvoegsel;
-        this.gebDat = gebDat;
-        this.gebPlaats = gebPlaats;
+        this.gebDat = geboortedat;
+        this.gebPlaats = geboorteplaats;
         this.geslacht = g;
         this.ouderlijkGezin = ouderlijkGezin;
+        this.alsOuderBetrokkenIn = null;
     }
 
     // ********methoden****************************************
@@ -82,7 +83,7 @@ public class Persoon {
      */
     public String getInitialen() {
         String result = "";
-        for(Integer i = 1, i < voornamen.length, ++i)
+        for(int i = 1; i < voornamen.length; ++i)
         {
             result = voornamen[i].substring(1,1);
             result = result + ". ";
@@ -225,7 +226,18 @@ public class Persoon {
      * null
      */
     public Gezin heeftOngehuwdGezinMet(Persoon andereOuder) {
-        //todo opgave 1
+        if (andereOuder == null)
+        {
+            return null;
+        }
+        
+        for (Gezin gezin : alsOuderBetrokkenIn)
+        {
+            if (gezin.getOuder1() == andereOuder || gezin.getOuder2() == andereOuder)
+            {
+                return gezin;
+            }
+        }
         return null;
     }
 
@@ -276,7 +288,13 @@ public class Persoon {
      * @return true als persoon op datum gescheiden is, anders false
      */
     public boolean isGescheidenOp(Calendar datum) {
-        //todo opgave 1
+        for (Gezin gezin : alsOuderBetrokkenIn)
+        {
+            if (gezin.getScheidingsdatum() != null)
+            {
+                return true;
+            }
+        }
         return false;
     }
 
