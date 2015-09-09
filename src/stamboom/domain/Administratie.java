@@ -180,8 +180,17 @@ public class Administratie {
      * anders het gehuwde gezin
      */
     public Gezin addHuwelijk(Persoon ouder1, Persoon ouder2, Calendar huwdatum) {
-        //todo opgave 1
-        return null;
+        for(int i = 0; i < gezinnen.size(); ++i)
+        {
+            Gezin gezin = gezinnen.get(i);
+            if(gezin.getOuder1() == ouder1 && gezin.getOuder2() == ouder2)
+            {
+                return gezin;
+            }
+        }
+        Gezin g = new Gezin(nextGezinsNr, ouder1, ouder2);
+        gezinnen.add(g);
+        return g;
     }
 
     /**
@@ -207,8 +216,14 @@ public class Administratie {
      * geretourneerd
      */
     public Persoon getPersoon(int nr) {
-        //todo opgave 1
-        //aanname: er worden geen personen verwijderd
+        for(int i = 0; i < personen.size(); ++i)
+        {
+            Persoon p = personen.get(i);
+            if(p.getNr == nr)
+            {
+                return p;
+            }
+        }
         return null;
     }
 
