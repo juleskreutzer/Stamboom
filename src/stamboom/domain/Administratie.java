@@ -222,7 +222,7 @@ public class Administratie {
         for(int i = 0; i < personen.size(); ++i)
         {
             Persoon p = personen.get(i);
-            if(p.getNr == nr)
+            if(p.getNr() == nr)
             {
                 return p;
             }
@@ -236,15 +236,15 @@ public class Administratie {
      * achternaam (ongeacht hoofd- en kleine letters)
      */
     public ArrayList<Persoon> getPersonenMetAchternaam(String achternaam) {
-        
+        ArrayList<Persoon> persoonlijst = new ArrayList<>();
         for(int i = 0; i < personen.size(); i++){
             Persoon p = personen.get(i);
             if(p.getAchternaam().equals(achternaam))
             {
-                // Persoon toevoegen aan ArrayList
-                throw new IllegalArgumentException("Dit moet nog geïmplementeerd worden!");
+                persoonlijst.add(p);
             }
         }
+        return persoonlijst;
     }
 
     /**
@@ -268,10 +268,17 @@ public class Administratie {
      */
     public Persoon getPersoon(String[] vnamen, String anaam, String tvoegsel,
             Calendar gebdat, String gebplaats) {
+        
+        StringBuilder voornamen = new StringBuilder();
+        for (String s : vnamen) {
+            voornamen.append(s).append(' ');
+        }
+        String vn = voornamen.toString();
+        
         for(int i = 0; i < personen.size(); ++i)
         {
             Persoon p = personen.get(i);
-            if(p.getVoornamen() == vnamen && p.getAchternaam().equals(anaam) && p.getTussenvoegsel().equals(tvoegsel) && p.getGebDat().equals(gebdat) && p.getGebPlaats().equals(gebplaats))
+            if(p.getVoornamen().equals(vn) && p.getAchternaam().equals(anaam) && p.getTussenvoegsel().equals(tvoegsel) && p.getGebDat().equals(gebdat) && p.getGebPlaats().equals(gebplaats))
             {
                 return p; // Persoon gevonden
             }
