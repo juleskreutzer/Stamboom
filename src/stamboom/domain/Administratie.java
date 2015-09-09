@@ -65,9 +65,12 @@ public class Administratie {
         if (gebplaats.trim().isEmpty()) {
             throw new IllegalArgumentException("lege geboorteplaats is niet toegestaan");
         }
-
-        //todo opgave 1
-        return null;
+        
+        // Nieuwe persoon aanmaken
+        Persoon p = new Persoon(nextPersNr, vnamen, anaam, tvoegsel, gebdat, gebplaats, geslacht, ouderlijkGezin);
+        nextPersNr++;
+        personen.add(p);
+        return p;        
     }
 
     /**
@@ -233,8 +236,15 @@ public class Administratie {
      * achternaam (ongeacht hoofd- en kleine letters)
      */
     public ArrayList<Persoon> getPersonenMetAchternaam(String achternaam) {
-        //todo opgave 1
-        return null;
+        
+        for(int i = 0; i < personen.size(); i++){
+            Persoon p = personen.get(i);
+            if(p.getAchternaam().equals(achternaam))
+            {
+                // Persoon toevoegen aan ArrayList
+                throw new IllegalArgumentException("Dit moet nog geïmplementeerd worden!");
+            }
+        }
     }
 
     /**
@@ -242,8 +252,7 @@ public class Administratie {
      * @return de geregistreerde personen
      */
     public List<Persoon> getPersonen() {
-        // todo opgave 1
-        return null;
+        return personen;
     }
 
     /**
@@ -259,8 +268,15 @@ public class Administratie {
      */
     public Persoon getPersoon(String[] vnamen, String anaam, String tvoegsel,
             Calendar gebdat, String gebplaats) {
-        //todo opgave 1
-        return null;
+        for(int i = 0; i < personen.size(); ++i)
+        {
+            Persoon p = personen.get(i);
+            if(p.getVoornamen() == vnamen && p.getAchternaam().equals(anaam) && p.getTussenvoegsel().equals(tvoegsel) && p.getGebDat().equals(gebdat) && p.getGebPlaats().equals(gebplaats))
+            {
+                return p; // Persoon gevonden
+            }
+        }
+        return null; // Geen persoon gevonden
     }
 
     /**
@@ -268,7 +284,7 @@ public class Administratie {
      * @return de geregistreerde gezinnen
      */
     public List<Gezin> getGezinnen() {
-        return null;
+        return gezinnen;
     }
 
     /**
