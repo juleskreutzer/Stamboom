@@ -5,9 +5,13 @@
 package stamboom.storage;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 import stamboom.domain.Administratie;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 public class SerializationMediator implements IStorageMediator {
 
@@ -31,9 +35,28 @@ public class SerializationMediator implements IStorageMediator {
         if (!isCorrectlyConfigured()) {
             throw new RuntimeException("Serialization mediator isn't initialized correctly.");
         }
-        
-        // todo opgave 2
-        return null;
+        Administratie admin = null;
+        try{
+            FileInputStream fileIn = new FileInputStream("data.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            admin = (Administratie) in.readObject();
+            in.close();
+            fileIn.close();
+            System.out.printf("The file \"data.ser\" has been loaded into the program!");
+            return admin;
+        }
+        catch(IOException i)
+        {
+            i.toString();
+            return null;
+            
+        }
+        catch(ClassNotFoundException i)
+        {
+            System.out.printf("The class \"Administratie\" hasn't been found.");
+            i.toString();
+            return null;
+        }
     }
 
     @Override
@@ -42,7 +65,19 @@ public class SerializationMediator implements IStorageMediator {
             throw new RuntimeException("Serialization mediator isn't initialized correctly.");
         }
 
-        // todo opgave 2
+        try
+        {
+            FileOutputStream fileOut = new FileOutputStream("data.ser");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(admin);
+            out.close();
+            fileOut.close();
+            System.out.printf("File has been saved to \"data.ser\"");
+        }
+        catch(IOException i)
+        {
+            i.toString();
+        }
   
     }
 
