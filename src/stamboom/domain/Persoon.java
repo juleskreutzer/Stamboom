@@ -36,14 +36,24 @@ public class Persoon implements java.io.Serializable {
             Calendar geboortedat, String geboorteplaats, Geslacht g, Gezin ouderlijkGezin) {
         this.nr = persNr;
         this.voornamen = vnamen;
-        this.achternaam = anaam;
-        this.tussenvoegsel = tvoegsel;
-        this.gebDat = geboortedat;
-        this.gebPlaats = geboorteplaats;
-        this.geslacht = g;
+        for(int i = 0; i < vnamen.length; i++)
+        {
+            String naam = vnamen[i];
+            naam = naam.replaceAll("\\s+","");
+            naam = naam.substring(0, 1).toUpperCase() + naam.substring(1).toLowerCase();
+            voornamen[i] = naam;
+        }
+        achternaam = anaam;
+        tussenvoegsel = tvoegsel;
+        gebDat = geboortedat;
+        gebPlaats = geboorteplaats;
+        geslacht = g;
         this.ouderlijkGezin = ouderlijkGezin;
-        this.alsOuderBetrokkenIn = null;
+        
+        alsOuderBetrokkenIn = new ArrayList<Gezin>();
     }
+    
+    
 
     // ********methoden****************************************
     /**
@@ -82,14 +92,14 @@ public class Persoon implements java.io.Serializable {
      * door een punt
      */
     public String getInitialen() {
-        String result = "";
-        for(int i = 1; i < voornamen.length; ++i)
-        {
-            result = voornamen[i].substring(1,1);
-            result = result + ". ";
+        StringBuilder builder = new StringBuilder();
+        
+        for (String initiaal : voornamen) {
+            builder.append(initiaal.toCharArray()[0]);
+            builder.append(".");
         }
-
-        return result;
+        //create string
+        return builder.toString();
     }
 
     /**
