@@ -372,7 +372,18 @@ public class Persoon implements java.io.Serializable {
      */
     public String stamboomAlsString() {
         StringBuilder builder = new StringBuilder();
+        String afscheiding = System.getProperty("line.separator");
 
+        Arraylist<PersoonMetGeneratie> lijst = new Arraylist<>();
+        voegJouwStamboomToe(lijst, 0);
+        for(PersoonMetGeneratie persoon : lijst)
+        {
+            for (int i = 0; i < p.getGeneratie(); i++)
+            {
+                builder.append(" ");
+            }
+            builder.append(p.getPersoonsgegevens() + afscheiding);
+        }
 
         return builder.toString();
     }
