@@ -177,9 +177,10 @@ public class Persoon implements java.io.Serializable {
      * @return of ouderlijk gezin kon worden toegevoegd
      */
     boolean setOuders(Gezin ouderlijkGezin) {
-        if(this.ouderlijkGezin != null)
+        if(this.ouderlijkGezin == null)
         {
             this.ouderlijkGezin = ouderlijkGezin;
+            ouderlijkGezin.breidUitMet(this);
             // OuderlijkGezin kan worden toegevoegd
             return true;
         }

@@ -215,17 +215,36 @@ public class Administratie implements java.io.Serializable {
      * anders het gehuwde gezin
      */
     public Gezin addHuwelijk(Persoon ouder1, Persoon ouder2, Calendar huwdatum) {
-        for(int i = 0; i < gezinnen.size(); ++i)
+        //Check of ouders niet hetzelfde zijn
+        if(ouder1 == ouder2)
         {
-            Gezin gezin = gezinnen.get(i);
-            if(gezin.getOuder1() == ouder1 && gezin.getOuder2() == ouder2)
-            {
-                return gezin;
-            }
+            return null;
         }
-        Gezin g = new Gezin(nextGezinsNr, ouder1, ouder2);
-        gezinnen.add(g);
-        return g;
+        //Nieuw gezin
+        Gezin gezin = ouder1.heeftOngehuwdGezinMet(ouder2);
+        
+        if(gezin != null)
+        {
+            gezin.setHuwelijk(huwdatum);
+            
+            return gezin;
+        }
+        
+        if(ouder1.kanTrouwenOp(huwdatum) && ouder2.kanTrouwenOp(huwdatum))
+        {
+            gezin = new Gezin(nextGezinsNr, ouder1, ouder2);
+            gezin.setHuwelijk(huwdatum);
+            
+            gezinnen.add(gezin);
+            nextGezinsNr++;
+            
+            ouder1.wordtOuderIn(gezin);
+            ouder2.wordtOuderIn(gezin);
+            
+            return gezin;
+        }
+        
+        return null;
     }
 
     /**
