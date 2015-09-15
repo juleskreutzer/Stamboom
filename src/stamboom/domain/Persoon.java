@@ -374,15 +374,15 @@ public class Persoon implements java.io.Serializable {
         StringBuilder builder = new StringBuilder();
         String afscheiding = System.getProperty("line.separator");
 
-        Arraylist<PersoonMetGeneratie> lijst = new Arraylist<>();
+        ArrayList<PersoonMetGeneratie> lijst = new ArrayList<>();
         voegJouwStamboomToe(lijst, 0);
         for(PersoonMetGeneratie persoon : lijst)
         {
-            for (int i = 0; i < p.getGeneratie(); i++)
+            for (int i = 0; i < persoon.getGeneratie(); i++)
             {
                 builder.append(" ");
             }
-            builder.append(p.getPersoonsgegevens() + afscheiding);
+            builder.append(persoon.getPersoonsgegevens() + afscheiding);
         }
 
         return builder.toString();

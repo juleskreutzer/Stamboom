@@ -19,8 +19,8 @@ public class Administratie implements java.io.Serializable {
     public Administratie() {
         nextGezinsNr = 0;
         nextPersNr = 0;
-        this.personen = null;
-        this.gezinnen = null;
+        this.personen = new ArrayList<Persoon>();
+        this.gezinnen = new ArrayList<Gezin>();
     }
 
     //**********************methoden****************************************

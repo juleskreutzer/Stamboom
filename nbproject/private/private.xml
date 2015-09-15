@@ -3,11 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/juleskreutzer/Documents/github/Stamboom/src/stamboom/domain/Administratie.java</file>
-            <file>file:/Users/juleskreutzer/Documents/github/Stamboom/src/stamboom/controller/StamboomController.java</file>
-            <file>file:/Users/juleskreutzer/Documents/github/Stamboom/src/stamboom/storage/SerializationMediator.java</file>
-            <file>file:/Users/juleskreutzer/Documents/github/Stamboom/src/stamboom/domain/Persoon.java</file>
-            <file>file:/Users/juleskreutzer/Documents/github/Stamboom/tst/stamboom/storage/SerialisatieTest.java</file>
+            <file>file:/C:/Users/rvanduijnhoven/Documents/GitHub/Stamboom/src/stamboom/domain/Gezin.java</file>
+            <file>file:/C:/Users/rvanduijnhoven/Documents/GitHub/Stamboom/src/stamboom/domain/Persoon.java</file>
+            <file>file:/C:/Users/rvanduijnhoven/Documents/GitHub/Stamboom/tst/stamboom/domain/StamboomTest.java</file>
+            <file>file:/C:/Users/rvanduijnhoven/Documents/GitHub/Stamboom/src/stamboom/domain/Administratie.java</file>
         </group>
     </open-files>
 </project-private>
