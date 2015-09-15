@@ -37,7 +37,7 @@ public class SerializationMediator implements IStorageMediator {
         }
         Administratie admin = null;
         try{
-            FileInputStream fileIn = new FileInputStream("data.ser");
+            FileInputStream fileIn = new FileInputStream(props.getProperty("file"));
             ObjectInputStream in = new ObjectInputStream(fileIn);
             admin = (Administratie) in.readObject();
             in.close();
@@ -67,7 +67,7 @@ public class SerializationMediator implements IStorageMediator {
 
         try
         {
-            FileOutputStream fileOut = new FileOutputStream("data.ser");
+            FileOutputStream fileOut = new FileOutputStream(props.getProperty("file"));
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(admin);
             out.close();
