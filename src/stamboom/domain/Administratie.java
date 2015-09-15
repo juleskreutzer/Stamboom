@@ -288,10 +288,11 @@ public class Administratie implements java.io.Serializable {
      */
     public ArrayList<Persoon> getPersonenMetAchternaam(String achternaam) {
         ArrayList<Persoon> persoonlijst = new ArrayList<>();
-        for(int i = 0; i < personen.size(); i++){
+        for(int i = 0; i < personen.size(); ++i){
             Persoon p = personen.get(i);
-            if(p.getAchternaam().equals(achternaam))
+            if(p.getAchternaam().toLowerCase().equals(achternaam.toLowerCase()))
             {
+                // Zonder .toLowerCate() wordt er een error gegeven bij te unit tests
                 persoonlijst.add(p);
             }
         }
@@ -303,7 +304,7 @@ public class Administratie implements java.io.Serializable {
      * @return de geregistreerde personen
      */
     public List<Persoon> getPersonen() {
-        return personen;
+        return Collections.unmodifiableList(personen);
     }
 
     /**
@@ -320,21 +321,24 @@ public class Administratie implements java.io.Serializable {
     public Persoon getPersoon(String[] vnamen, String anaam, String tvoegsel,
             Calendar gebdat, String gebplaats) {
         
-        StringBuilder voornamen = new StringBuilder();
-        for (String s : vnamen) {
-            voornamen.append(s).append(' ');
+        // Array van voornamen in een string zetten
+        String voornamen = "";
+        for (String voornaam : vnamen) {
+            voornamen += voornaam.substring(0, 1).toUpperCase() + ".";
         }
-        String vn = voornamen.toString();
         
-        for(int i = 0; i < personen.size(); ++i)
+        
+        for(Persoon p : personen)
         {
-            Persoon p = personen.get(i);
-            if(p.getVoornamen().equals(vn) && p.getAchternaam().equals(anaam) && p.getTussenvoegsel().equals(tvoegsel) && p.getGebDat().equals(gebdat) && p.getGebPlaats().equals(gebplaats))
+            if(p.getInitialen().toLowerCase().equals(voornamen.toLowerCase())
+                    && p.getAchternaam().toLowerCase().equals(anaam.toLowerCase()) && p.getGebDat().equals(gebdat) && p.getGebPlaats().toLowerCase().equals(gebplaats.toLowerCase()) && p.getTussenvoegsel().toLowerCase().equals(tvoegsel.toLowerCase()))
             {
-                return p; // Persoon gevonden
+                return p; // persoon gevonden
             }
         }
-        return null; // Geen persoon gevonden
+        
+        return null; // geen persoon gevonden
+                    
     }
 
     /**
@@ -352,7 +356,6 @@ public class Administratie implements java.io.Serializable {
      * geretourneerd
      */
     public Gezin getGezin(int gezinsNr) {
-        gezinsNr = 3;
         // aanname: er worden geen gezinnen verwijderd
         if (gezinnen != null && 1 <= gezinsNr && 1 <= gezinnen.size()) {
             return gezinnen.get(gezinsNr - 1);

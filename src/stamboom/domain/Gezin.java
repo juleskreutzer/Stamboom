@@ -268,19 +268,18 @@ public class Gezin {
      * de ouders hierna gingen/gaan scheiden.
      */
     public boolean isHuwelijkOp(Calendar datum) {
-        if (huwelijksdatum != null)
+        if (huwelijksdatum == null)
         {
-            if (huwelijksdatum.get(huwelijksdatum.YEAR) <= datum.get(datum.YEAR))
-            {
-                if (huwelijksdatum.get(huwelijksdatum.MONTH) <= datum.get(datum.MONTH))
-                {
-                    if (huwelijksdatum.get(huwelijksdatum.DAY_OF_MONTH) <= datum.get(datum.DAY_OF_MONTH))
-                    {
-                        return true;
-                    }
-                }
-            }
+            // geen huwelijks datum
+            return false;
         }
+        
+        if(huwelijksdatum.before(datum) || huwelijksdatum.equals(datum))
+        {
+            // Huwelijks datum is voor huidige datum OF gelijk aan huidige datum
+            return true;
+        }
+        
         return false;
     }
 
@@ -298,10 +297,17 @@ public class Gezin {
      * @return true als dit een gescheiden huwelijk is op datum, anders false
      */
     public boolean heeftGescheidenOudersOp(Calendar datum) {
-        if (scheidingsdatum == datum)
+        if (scheidingsdatum == null)
         {
-            return true;
+            // Ouders zijn (nog) niet gescheiden
+            return false;
         }
-        return false;
+       if(scheidingsdatum.equals(datum) || scheidingsdatum.before(datum))
+       {
+           // Ouders zijn gescheiden op huidige datum OF voor huidige datum
+           return true;
+       }
+       
+       return false;
     }
 }

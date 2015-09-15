@@ -109,9 +109,13 @@ public class Persoon implements java.io.Serializable {
      * gescheiden door een spatie
      */
     public String getNaam() {
-        String result = "";
-        result = getInitialen() + " " + tussenvoegsel +(tussenvoegsel.length() > 0 ? " " : "") + achternaam;
-
+        String result = getInitialen();
+        if(tussenvoegsel != "")
+        {
+            result += " " + tussenvoegsel;
+        }
+        
+        result += " " + achternaam;
         return result;
     }
 
