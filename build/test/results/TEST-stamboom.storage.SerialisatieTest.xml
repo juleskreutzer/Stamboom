@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="1" failures="0" hostname="MacBook-Pro-van-Jules.local" name="stamboom.storage.SerialisatieTest" skipped="0" tests="1" time="0.485" timestamp="2015-09-11T08:32:16">
+<testsuite errors="1" failures="0" hostname="MacBook-Pro-van-Jules.local" name="stamboom.storage.SerialisatieTest" skipped="0" tests="1" time="0.123" timestamp="2015-09-15T07:38:16">
   <properties>
     <property name="libs.jsp-compiler.javadoc" value="" />
     <property name="netbeans.autoupdate.country" value="NL" />
@@ -69,7 +69,7 @@
     <property name="libs.j2me_common_ant.maven-pom" value="" />
     <property name="libs.spring-webmvc3.0.maven-pom" value="" />
     <property name="libs.swing-layout.maven-pom" value="" />
-    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner stamboom.storage.SerialisatieTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,/Users/juleskreutzer/Documents/github/Stamboom/build/test/results/TEST-stamboom.storage.SerialisatieTest.xml crashfile=/Users/juleskreutzer/Documents/github/Stamboom/build/junitvmwatcher5717966387017544427.properties propsfile=/Users/juleskreutzer/Documents/github/Stamboom/build/junit1151037082347782524.properties" />
+    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner stamboom.storage.SerialisatieTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,/Users/juleskreutzer/Documents/github/Stamboom/build/test/results/TEST-stamboom.storage.SerialisatieTest.xml crashfile=/Users/juleskreutzer/Documents/github/Stamboom/build/junitvmwatcher6158678268077040266.properties propsfile=/Users/juleskreutzer/Documents/github/Stamboom/build/junit4930661557176376521.properties" />
     <property name="auxiliary.org-netbeans-modules-editor-indent.text.x-java.CodeStyle.project.wrapAnnotations" value="WRAP_NEVER" />
     <property name="build.classes.dir" value="build/classes" />
     <property name="netbeans.accept_license_class" value="org.netbeans.license.AcceptLicense" />
@@ -117,7 +117,7 @@
     <property name="javac.debug" value="true" />
     <property name="javadoc.splitindex" value="true" />
     <property name="file.separator" value="/" />
-    <property name="javac.includesfile.binary" value="/Users/juleskreutzer/Documents/github/Stamboom/null383631691" />
+    <property name="javac.includesfile.binary" value="/Users/juleskreutzer/Documents/github/Stamboom/null1855738155" />
     <property name="libs.junit_4.maven-pom" value="" />
     <property name="mkdist.disabled" value="false" />
     <property name="javac.test.processorpath" value="/Applications/NetBeans/NetBeans 8.0.2.app/Contents/Resources/NetBeans/ide/modules/ext/mysql-connector-java-5.1.23-bin.jar:/Applications/NetBeans/NetBeans 8.0.2.app/Contents/Resources/NetBeans/platform/modules/ext/junit-4.10.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/Home/jre/lib/javaws.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/Home/jre/lib/deploy.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/Home/jre/lib/plugin.jar:build/classes" />
@@ -456,7 +456,7 @@
     <property name="libs.javaee-web-api-7.0.javadoc" value="/Applications/NetBeans/NetBeans 8.0.2.app/Contents/Resources/NetBeans/enterprise/docs/javaee-doc-api.jar" />
     <property name="" value="======" />
   </properties>
-  <testcase classname="stamboom.storage.SerialisatieTest" name="testOpslag" time="0.015">
+  <testcase classname="stamboom.storage.SerialisatieTest" name="testOpslag" time="0.012">
     <error type="java.lang.NullPointerException">java.lang.NullPointerException
 	at stamboom.domain.Administratie.addPersoon(Administratie.java:72)
 	at stamboom.storage.SerialisatieTest.testOpslag(SerialisatieTest.java:38)
