@@ -307,8 +307,19 @@ public class Persoon {
      * grootouders etc); de persoon zelf telt ook mee
      */
     public int afmetingStamboom() {
-        //todo opgave 2
-        return -1;
+        int counter = 1;
+
+        if(ouderlijkGezin != null)
+        {
+            counter+=ouderlijkGezin.getOuder1().afmetingStamboom();//tel alles van 1e ouder
+            if(ouderlijkGezin.getOuder2() != null)
+            {
+                ouderlijkGezin.getOuder2().afmetingStamboom()l//ouder 2, als deze bestaat
+            }
+        }
+
+        return counter;
+
     }
 
     /**
