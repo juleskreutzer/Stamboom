@@ -47,7 +47,7 @@ public class DomeinTest extends TestCase{
         controller = new StamboomController();
         adm = controller.getAdministratie();
         piet = adm.addPersoon(Geslacht.MAN, new String[]{"Piet", "Franciscus"}, "Swinkels",
-                "", new GregorianCalendar(1950, Calendar.APRIL, 23), "ede", null);
+                "", new GregorianCalendar(1950, Calendar.APRIL, 23), "Ede", null);
         teuntje = adm.addPersoon(Geslacht.VROUW, new String[]{"Teuntje"}, "Vries", "de",
                 new GregorianCalendar(1949, Calendar.MAY, 5), "Amersfoort", null);
         pietEnTeuntje = adm.addHuwelijk(piet, teuntje, new GregorianCalendar(1970, Calendar.MAY, 23));

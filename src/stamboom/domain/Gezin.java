@@ -188,29 +188,32 @@ public class Gezin {
      * kinderen uit deze relatie (per kind voorafgegaan door ' -')
      */
     public String beschrijving() {
-        String beschrijving = "";
-        String nummer = Integer.toString(nr);
-        String huwDatum = "Geen huwelijksdatum bekend.";
-        String kinders = "Geen kinderen";
-
+        String beschrijving = nr + " " + ouder1.getNaam();
+        
+        if(ouder2 != null)
+        {
+            beschrijving += " met " + ouder2.getNaam();
+        }
+        
         if (huwelijksdatum != null)
         {
-            SimpleDateFormat sdf = new SimpleDateFormat("DD/MM/YYYY");
-            /*Met sdf zou je zo een calendar format om kunnen zetten naar een string, met formaat dag/maand/jaar */
-            huwDatum = sdf.format(huwelijksdatum.getTime());
+            beschrijving += " " + StringUtilities.datumString(huwelijksdatum);
         }
-
-        if (aantalKinderen() > 0)
+        
+        if (kinderen.size() != 0)
         {
-            kinders = "; kinderen:";
-            for (Persoon p : kinderen)
+            beschrijving += "; kinderen:";
+            
+            for (int i = 0; i < kinderen.size(); i++)
             {
-                kinders = kinders + " -" + p.getNaam();
+                Persoon kind = kinderen.get(i);
+                beschrijving += " -" + kind.getVoornamen();
             }
         }
-
-        beschrijving = nummer + ", huwelijksdatum: " + huwDatum + " " + kinders;
-        return kinders;
+        
+        return beschrijving;
+        
+        
     }
 
     /**

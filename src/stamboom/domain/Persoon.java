@@ -100,7 +100,7 @@ public class Persoon implements java.io.Serializable {
      */
     public String getNaam() {
         String result = "";
-        result = getInitialen() + " " + tussenvoegsel + " " + achternaam;
+        result = getInitialen() + " " + tussenvoegsel +(tussenvoegsel.length() > 0 ? " " : "") + achternaam;
 
         return result;
     }

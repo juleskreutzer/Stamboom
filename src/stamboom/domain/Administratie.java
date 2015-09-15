@@ -1,6 +1,7 @@
 package stamboom.domain;
 
 import java.util.*;
+import java.lang.Object;
 
 public class Administratie implements java.io.Serializable {
 
@@ -17,8 +18,8 @@ public class Administratie implements java.io.Serializable {
      * (apart) opvolgend genummerd vanaf 1
      */
     public Administratie() {
-        nextGezinsNr = 0;
-        nextPersNr = 0;
+        nextGezinsNr = 1;
+        nextPersNr = 1;
         this.personen = new ArrayList<Persoon>();
         this.gezinnen = new ArrayList<Gezin>();
     }
@@ -67,10 +68,41 @@ public class Administratie implements java.io.Serializable {
         }
         
         // Nieuwe persoon aanmaken
-        Persoon p = new Persoon(nextPersNr, vnamen, anaam, tvoegsel, gebdat, gebplaats, geslacht, ouderlijkGezin);
+        int i = 0;
+        String[] voornamen = new String[vnamen.length];
+        for(String voornaam : vnamen)
+        {
+            voornamen[i] = voornaam.substring(0, 1).toUpperCase() + voornaam.substring(1).toLowerCase();
+            i++;
+        }
+        
+        String achternaam = anaam.substring(0, 1).toUpperCase() + anaam.substring(1).toLowerCase();
+        String tussenvoegsel = tvoegsel.toLowerCase();
+        String geboortePlaats = gebplaats.substring(0, 1).toUpperCase() + gebplaats.substring(1).toLowerCase();
+        
+        Persoon newPerson = new Persoon(nextPersNr, voornamen, achternaam, tussenvoegsel, gebdat, geboortePlaats, geslacht, ouderlijkGezin);
+        
+        for(Persoon selectedPerson : personen)
+        {   
+            if(selectedPerson.getNaam().toLowerCase().equals(newPerson.getNaam().toLowerCase()) 
+                    && selectedPerson.getGebDat().equals(newPerson.getGebDat())
+                    && selectedPerson.getGebPlaats().toLowerCase().equals(newPerson.getGebPlaats().toLowerCase()))
+            {
+                return null;
+            }
+        }
+        
+        
+        personen.add(newPerson);
+        
+        if(ouderlijkGezin != null)
+        {
+            ouderlijkGezin.breidUitMet(newPerson);
+        }
+        
         nextPersNr++;
-        personen.add(p);
-        return p;        
+        
+        return newPerson;
     }
 
     /**
