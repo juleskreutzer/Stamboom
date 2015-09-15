@@ -8,7 +8,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import stamboom.util.StringUtilities;
 
-public class Persoon {
+public class Persoon implements java.io.Serializable {
 
     // ********datavelden**************************************
     private final int nr;
@@ -314,7 +314,7 @@ public class Persoon {
             counter+=ouderlijkGezin.getOuder1().afmetingStamboom();//tel alles van 1e ouder
             if(ouderlijkGezin.getOuder2() != null)
             {
-                ouderlijkGezin.getOuder2().afmetingStamboom()l//ouder 2, als deze bestaat
+                ouderlijkGezin.getOuder2().afmetingStamboom();//ouder 2, als deze bestaat
             }
         }
 
@@ -335,7 +335,16 @@ public class Persoon {
      * toegewezen;
      */
     void voegJouwStamboomToe(ArrayList<PersoonMetGeneratie> lijst, int g) {
-        //todo opgave 2
+        lijst.add(new PersoonMetGeneratie(toString(), g));
+        if(ouderlijkGezin != null)
+        {
+            ouderlijkGezin.getOuder1().voegJouwStamboomToe(lijst, g+1);
+
+            if(ouderlijkGezin.getOuder2() != null)
+            {
+                ouderlijkGezin.getOuder2().voegJouwStamboomToe(lijst, g+1);
+            }
+        }
     }
 
     /**
@@ -363,7 +372,7 @@ public class Persoon {
      */
     public String stamboomAlsString() {
         StringBuilder builder = new StringBuilder();
-        //todo opgave 2
+
 
         return builder.toString();
     }
