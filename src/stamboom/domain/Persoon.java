@@ -326,10 +326,14 @@ public class Persoon implements java.io.Serializable {
 
         if(ouderlijkGezin != null)
         {
-            counter+=ouderlijkGezin.getOuder1().afmetingStamboom();//tel alles van 1e ouder
+            if(ouderlijkGezin.getOuder1() != null)
+            {
+                counter+= ouderlijkGezin.getOuder1().afmetingStamboom();//tel alles van 1e ouder
+                
+            }
             if(ouderlijkGezin.getOuder2() != null)
             {
-                ouderlijkGezin.getOuder2().afmetingStamboom();//ouder 2, als deze bestaat
+                counter+= ouderlijkGezin.getOuder2().afmetingStamboom();//ouder 2, als deze bestaat
             }
         }
 
@@ -395,7 +399,7 @@ public class Persoon implements java.io.Serializable {
         {
             for (int i = 0; i < persoon.getGeneratie(); i++)
             {
-                builder.append(" ");
+                builder.append("  ");
             }
             builder.append(persoon.getPersoonsgegevens() + afscheiding);
         }

@@ -42,9 +42,14 @@ public class StamboomController {
      * @throws IOException
      */
     public void serialize(File bestand) throws IOException {
-        Properties properties = new Properties();
-        properties.setProperty("file", bestand.getAbsolutePath());
-        storageMediator.configure(properties);
+        Properties props = new Properties();
+        if(bestand.exists())
+        {
+            bestand.delete();
+        }
+        bestand.createNewFile();
+        props.setProperty("file", bestand.getAbsolutePath());
+        storageMediator.configure(props);
         storageMediator.save(admin);
         
         

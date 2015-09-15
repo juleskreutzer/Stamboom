@@ -43,7 +43,6 @@ public class SerializationMediator implements IStorageMediator {
             in.close();
             fileIn.close();
             System.out.printf("The file \"data.ser\" has been loaded into the program!");
-            return admin;
         }
         catch(IOException i)
         {
@@ -57,6 +56,7 @@ public class SerializationMediator implements IStorageMediator {
             i.toString();
             return null;
         }
+        return admin;
     }
 
     @Override
@@ -77,6 +77,7 @@ public class SerializationMediator implements IStorageMediator {
         catch(IOException i)
         {
             i.toString();
+            return;
         }
   
     }
