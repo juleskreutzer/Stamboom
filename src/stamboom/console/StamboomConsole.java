@@ -1,5 +1,7 @@
 package stamboom.console;
 
+import java.io.File;
+import java.io.IOException;
 import stamboom.domain.*;
 import java.util.*;
 import stamboom.util.StringUtilities;
@@ -41,6 +43,13 @@ public class StamboomConsole {
                 case SHOW_GEZIN:
                     toonGezinsgegevens();
                     break;
+                case LOAD:
+                    laden();
+                    break;
+                case SAVE:
+                    opslaan();
+                    break;
+                    
             }
             choice = kiesMenuItem();
         }
@@ -49,6 +58,32 @@ public class StamboomConsole {
     Administratie getAdmin() {
         return controller.getAdministratie();
     }
+    
+    void laden()
+    {
+        try
+        {
+            File file = new File("data.ser");
+            controller.deserialize(file); 
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+    
+    void opslaan()
+    {
+        try{
+            File file = new File("data.ser");
+            controller.serialize(file);
+        }catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+    
+    
 
     void invoerNieuwePersoon() {
         Geslacht geslacht = null;
@@ -258,6 +293,7 @@ public class StamboomConsole {
         StamboomController controller = new StamboomController();
 
         StamboomConsole console = new StamboomConsole(controller);
+        
         //console.startMenu();
     }
 }
