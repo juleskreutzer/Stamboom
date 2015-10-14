@@ -63,7 +63,7 @@ public class StamboomConsole {
     {
         try
         {
-            File file = new File("data.ser");
+            File file = new File("file");
             controller.deserialize(file); 
         }
         catch(Exception ex)
@@ -75,7 +75,7 @@ public class StamboomConsole {
     void opslaan()
     {
         try{
-            File file = new File("data.ser");
+            File file = new File("file");
             controller.serialize(file);
         }catch(Exception ex)
         {

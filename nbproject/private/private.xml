@@ -10,6 +10,8 @@
             <file>file:/Users/juleskreutzer/Documents/github/Stamboom/src/stamboom/domain/Persoon.java</file>
             <file>file:/Users/juleskreutzer/Documents/github/Stamboom/src/stamboom/controller/StamboomController.java</file>
             <file>file:/Users/juleskreutzer/Documents/github/Stamboom/src/stamboom/storage/SerializationMediator.java</file>
+            <file>file:/Users/juleskreutzer/Documents/github/Stamboom/src/stamboom/console/StamboomConsole.java</file>
+            <file>file:/Users/juleskreutzer/Documents/github/Stamboom/src/stamboom/console/MenuItem.java</file>
         </group>
     </open-files>
 </project-private>
