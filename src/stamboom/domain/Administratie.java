@@ -2,6 +2,8 @@ package stamboom.domain;
 
 import java.util.*;
 import java.lang.Object;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class Administratie implements java.io.Serializable {
 
@@ -10,6 +12,8 @@ public class Administratie implements java.io.Serializable {
     private int nextPersNr;
     private final List<Persoon> personen;
     private final List<Gezin> gezinnen;
+    private transient ObservableList<Persoon> observablePersonen; // Transient fields will not get serialized!
+    private transient ObservableList<Gezin> observableGezinnen; // Transient fields will not get serialized!
 
     //***********************constructoren***********************************
     /**
@@ -22,6 +26,8 @@ public class Administratie implements java.io.Serializable {
         nextPersNr = 1;
         this.personen = new ArrayList<Persoon>();
         this.gezinnen = new ArrayList<Gezin>();
+        
+        setObservable();
     }
 
     //**********************methoden****************************************
@@ -361,5 +367,10 @@ public class Administratie implements java.io.Serializable {
             return gezinnen.get(gezinsNr - 1);
         }
         return null;
+    }
+
+    public void setObservable() {
+        observablePersonen = FXCollections.observableList(personen);
+        observableGezinnen = FXCollections.observableList(gezinnen);
     }
 }

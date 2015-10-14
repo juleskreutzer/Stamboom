@@ -6,6 +6,8 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import stamboom.util.StringUtilities;
 
 public class Persoon implements java.io.Serializable {
@@ -19,6 +21,7 @@ public class Persoon implements java.io.Serializable {
     private final String gebPlaats;
     private Gezin ouderlijkGezin;
     private final List<Gezin> alsOuderBetrokkenIn;
+    private transient ObservableList<Gezin> observableAlsOuderBetrokkenIn; // Transient fields will not get serialized!
     private final Geslacht geslacht;
 
     // ********constructoren***********************************
@@ -51,6 +54,7 @@ public class Persoon implements java.io.Serializable {
         this.ouderlijkGezin = ouderlijkGezin;
         
         alsOuderBetrokkenIn = new ArrayList<Gezin>();
+        observableAlsOuderBetrokkenIn = FXCollections.observableList(alsOuderBetrokkenIn);
     }
     
     
@@ -166,9 +170,15 @@ public class Persoon implements java.io.Serializable {
 
     /**
      * @return de gezinnen waar deze persoon bij betrokken is
-     */
+     
     public List<Gezin> getAlsOuderBetrokkenIn() {
         return (List<Gezin>) Collections.unmodifiableList(alsOuderBetrokkenIn);
+    }
+    * 
+    * */
+    
+    public ObservableList<Gezin> getAlsOuderBetrokkenIn() {
+        return (ObservableList<Gezin>)FXCollections.unmodifiableObservableList(observableAlsOuderBetrokkenIn);
     }
 
     /**
