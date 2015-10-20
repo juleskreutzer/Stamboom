@@ -7,8 +7,12 @@ package stamboom.storage;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Properties;
-import stamboom.domain.Administratie;
+import stamboom.domain.*;
+
+
 
 public class DatabaseMediator implements IStorageMediator {
 
@@ -23,7 +27,39 @@ public class DatabaseMediator implements IStorageMediator {
 
     @Override
     public void save(Administratie admin) throws IOException {
-        //todo opgave 4     
+        try {
+            //todo opgave 4
+            
+            initConnection();
+            ArrayList<String> queries = new ArrayList<String>();
+            
+            String insertInto = "insert into PERSOON(NR, VOORNAMEN, TUSSENVOEGSEL, ACHTERNAAM, GEBOORTEDATUM, GEBOORTEPLAATS, OUDERLIJKGEZIN, GESLACHT)\n" +
+                    "values ";
+            
+            for (Persoon p : admin.getPersonen())
+            {
+                String query = insertInto + "(" + p.getNr() + ", " + p.getVoornamen() + ", " + p.getTussenvoegsel() + ", " + p.getAchternaam() + ", " + p.getGebDat() +", "+p.getGebPlaats() + ", " + p.getOuderlijkGezin() + ", " + p.getGeslacht() + ");";
+                queries.add(query);
+            }
+            
+            for(String q: queries)
+            {
+                try {
+                    Statement st = conn.createStatement();
+                    st.executeUpdate(q);
+                } catch (SQLException ex) {
+                    System.out.print(ex.toString());
+                }
+            }
+            
+            
+            for(Gezin gezin : admin.getGezinnen()) {
+                
+            }
+            closeConnection();
+        } catch (SQLException ex) {
+            System.out.print(ex.toString());
+        }    
     }
 
     /**

@@ -88,7 +88,7 @@ public class Administratie implements java.io.Serializable {
         
         Persoon newPerson = new Persoon(nextPersNr, voornamen, achternaam, tussenvoegsel, gebdat, geboortePlaats, geslacht, ouderlijkGezin);
         
-        for(Persoon selectedPerson : personen)
+        for(Persoon selectedPerson : observablePersonen)
         {   
             if(selectedPerson.getNaam().toLowerCase().equals(newPerson.getNaam().toLowerCase()) 
                     && selectedPerson.getGebDat().equals(newPerson.getGebDat())
@@ -99,7 +99,7 @@ public class Administratie implements java.io.Serializable {
         }
         
         
-        personen.add(newPerson);
+        observablePersonen.add(newPerson);
         
         if(ouderlijkGezin != null)
         {
@@ -276,9 +276,9 @@ public class Administratie implements java.io.Serializable {
      * geretourneerd
      */
     public Persoon getPersoon(int nr) {
-        for(int i = 0; i < personen.size(); ++i)
+        for(int i = 0; i < observablePersonen.size(); ++i)
         {
-            Persoon p = personen.get(i);
+            Persoon p = observablePersonen.get(i);
             if(p.getNr() == nr)
             {
                 return p;
@@ -294,8 +294,8 @@ public class Administratie implements java.io.Serializable {
      */
     public ArrayList<Persoon> getPersonenMetAchternaam(String achternaam) {
         ArrayList<Persoon> persoonlijst = new ArrayList<>();
-        for(int i = 0; i < personen.size(); ++i){
-            Persoon p = personen.get(i);
+        for(int i = 0; i < observablePersonen.size(); ++i){
+            Persoon p = observablePersonen.get(i);
             if(p.getAchternaam().toLowerCase().equals(achternaam.toLowerCase()))
             {
                 // Zonder .toLowerCate() wordt er een error gegeven bij te unit tests
@@ -309,8 +309,8 @@ public class Administratie implements java.io.Serializable {
      *
      * @return de geregistreerde personen
      */
-    public List<Persoon> getPersonen() {
-        return Collections.unmodifiableList(personen);
+    public ObservableList<Persoon> getPersonen() {
+        return (ObservableList<Persoon>) FXCollections.unmodifiableObservableList(observablePersonen);
     }
 
     /**
@@ -334,7 +334,7 @@ public class Administratie implements java.io.Serializable {
         }
         
         
-        for(Persoon p : personen)
+        for(Persoon p : observablePersonen)
         {
             if(p.getInitialen().toLowerCase().equals(voornamen.toLowerCase())
                     && p.getAchternaam().toLowerCase().equals(anaam.toLowerCase()) && p.getGebDat().equals(gebdat) && p.getGebPlaats().toLowerCase().equals(gebplaats.toLowerCase()) && p.getTussenvoegsel().toLowerCase().equals(tvoegsel.toLowerCase()))
@@ -351,8 +351,8 @@ public class Administratie implements java.io.Serializable {
      *
      * @return de geregistreerde gezinnen
      */
-    public List<Gezin> getGezinnen() {
-        return gezinnen;
+    public ObservableList<Gezin> getGezinnen() {
+        return (ObservableList<Gezin>)FXCollections.unmodifiableObservableList(observableGezinnen);
     }
 
     /**
