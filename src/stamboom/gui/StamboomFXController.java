@@ -158,15 +158,17 @@ public class StamboomFXController extends StamboomController implements Initiali
 
     public void selectGezin(Event evt) {
         Gezin gezin = (Gezin)cbGezin.getSelectionModel().getSelectedItem();
-        if(gezin != null) 
+        if (gezin != null)
         {
             showGezin(gezin);
         }
+        
     }
 
     private void showGezin(Gezin gezin) {
+        
         clearTabGezin();
-        if(gezin != null) 
+        if (gezin != null)
         {
             tfGezinNummer.setText(String.valueOf(gezin.getNr()));
             if(gezin.getOuder1() != null) {
@@ -185,6 +187,8 @@ public class StamboomFXController extends StamboomController implements Initiali
             if(scheidingsDatum != null) {
                 tfGescheidenOp.setText(StringUtilities.datumString(scheidingsDatum));
             }
+            
+            lvKinderen.setItems(FXCollections.observableArrayList(gezin.getKinderen()));
         }
 
     }
@@ -321,6 +325,7 @@ public class StamboomFXController extends StamboomController implements Initiali
         }
 
         clearTabGezinInvoer();
+        initComboboxes();
     }
 
     public void cancelGezinInvoer(Event evt) {
