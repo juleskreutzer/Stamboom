@@ -309,8 +309,15 @@ public class Administratie implements java.io.Serializable {
      *
      * @return de geregistreerde personen
      */
+<<<<<<< HEAD
     public ObservableList<Persoon> getPersonen() {
         return (ObservableList<Persoon>) FXCollections.unmodifiableObservableList(observablePersonen);
+=======
+    public List<Persoon> getPersonen() {
+        //return Collections.unmodifiableList(personen);
+        observablePersonen = FXCollections.observableList(personen);
+        return (ObservableList<Persoon>)FXCollections.unmodifiableObservableList(observablePersonen);
+>>>>>>> origin/master
     }
 
     /**
@@ -352,6 +359,9 @@ public class Administratie implements java.io.Serializable {
      * @return de geregistreerde gezinnen
      */
     public ObservableList<Gezin> getGezinnen() {
+    public List<Gezin> getGezinnen() {
+        //return gezinnen;
+        observableGezinnen = FXCollections.observableList(gezinnen);
         return (ObservableList<Gezin>)FXCollections.unmodifiableObservableList(observableGezinnen);
     }
 
