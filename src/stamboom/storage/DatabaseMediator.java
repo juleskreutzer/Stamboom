@@ -247,7 +247,7 @@ public class DatabaseMediator implements IStorageMediator {
     }
 
     private void initConnection() throws SQLException {
-        conn = DriverManager.getConnection("jdbc:sqlite://C:/Users/rvanduijnhoven/Documents/stamboomdb.sqlite");
+        conn = DriverManager.getConnection("jdbc:sqlite://C:/Users/rvanduijnhoven/Documents/GitHub/Stamboom/stamboomdb.sqlite");
         
     }
 

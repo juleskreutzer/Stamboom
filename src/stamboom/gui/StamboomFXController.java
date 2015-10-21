@@ -159,18 +159,18 @@ public class StamboomFXController extends StamboomController implements Initiali
     }
 
     public void selectGezin(Event evt) {
-        Gezin gezin = (Gezin)cbGezin.getSelectionModel().getSelectedItem();
-        if (gezin != null)
-        {
-            showGezin(gezin);
-        }
+        Gezin gezin = (Gezin) cbGezin.getSelectionModel().getSelectedItem();
+        showGezin(gezin);
         
     }
 
     private void showGezin(Gezin gezin) {
         
-        clearTabGezin();
-        if (gezin != null)
+        if (gezin == null)
+        {
+            clearTabGezin();
+        }
+        else
         {
             tfGezinNummer.setText(String.valueOf(gezin.getNr()));
             if(gezin.getOuder1() != null) {
@@ -405,6 +405,7 @@ public class StamboomFXController extends StamboomController implements Initiali
             
             storageMediator.save(getAdministratie()); //Sla het object op
             
+            //save to database
             dbMediator.save(getAdministratie());
         }
         catch(Exception ex)
