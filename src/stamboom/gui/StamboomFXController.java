@@ -24,6 +24,7 @@ import stamboom.domain.Administratie;
 import stamboom.domain.Geslacht;
 import stamboom.domain.Gezin;
 import stamboom.domain.Persoon;
+import stamboom.storage.DatabaseMediator;
 import stamboom.storage.IStorageMediator;
 import stamboom.storage.SerializationMediator;
 import stamboom.util.StringUtilities;
@@ -92,6 +93,7 @@ public class StamboomFXController extends StamboomController implements Initiali
     //opgave 4
     private boolean withDatabase;
     private IStorageMediator storageMediator;
+    private DatabaseMediator dbMediator;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -384,10 +386,12 @@ public class StamboomFXController extends StamboomController implements Initiali
 
     
     public void openStamboom(Event evt) throws IOException {
-        File file = new File("file");
-        this.deserialize(file);
-        getAdministratie().setObservable();
-        initComboboxes();
+//        File file = new File("file");
+//        this.deserialize(file);
+//        getAdministratie().setObservable();
+//        initComboboxes();
+        
+          dbMediator.load();
     }
 
     
@@ -400,6 +404,8 @@ public class StamboomFXController extends StamboomController implements Initiali
             storageMediator.configure(props); //Configureer de mediator
             
             storageMediator.save(getAdministratie()); //Sla het object op
+            
+            dbMediator.save(getAdministratie());
         }
         catch(Exception ex)
         {
