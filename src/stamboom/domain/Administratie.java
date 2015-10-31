@@ -166,8 +166,15 @@ public class Administratie implements java.io.Serializable {
      * @param ouderlijkGezin
      * @return of ouderlijk gezin kon worden toegevoegd.
      */
-    public boolean setOuders(Persoon persoon, Gezin ouderlijkGezin) {
-        return persoon.setOuders(ouderlijkGezin);
+    public boolean setOuders(Persoon persoon, Gezin ouderlijkGezin){
+        if(persoon != null && ouderlijkGezin != null)
+        {
+            return persoon.setOuders(ouderlijkGezin);
+        }
+        else
+        {
+            return false;
+        }
     }
 
     /**

@@ -101,6 +101,7 @@ public class StamboomFXController extends StamboomController implements Initiali
         withDatabase = false;
         
         storageMediator = new SerializationMediator();
+        dbMediator = new DatabaseMediator();
     }
 
     private void initComboboxes() {
@@ -296,6 +297,7 @@ public class StamboomFXController extends StamboomController implements Initiali
             return;
         }
         Persoon ouder2 = (Persoon) cbOuder2Invoer.getSelectionModel().getSelectedItem();
+        
         Calendar huwdatum;
         try {
             huwdatum = StringUtilities.datum(tfHuwelijkInvoer.getText());
@@ -306,6 +308,8 @@ public class StamboomFXController extends StamboomController implements Initiali
         Gezin g;
         if (huwdatum != null) {
             g = getAdministratie().addHuwelijk(ouder1, ouder2, huwdatum);
+            boolean setouder1 = ouder1.setOuders(g);
+            boolean setouder2 = ouder2.setOuders(g);
             if (g == null) {
                 showDialog("Warning", "Invoer huwelijk is niet geaccepteerd");
             } else {
@@ -321,6 +325,8 @@ public class StamboomFXController extends StamboomController implements Initiali
             }
         } else {
             g = getAdministratie().addOngehuwdGezin(ouder1, ouder2);
+            boolean setouder1 = ouder1.setOuders(g);
+            boolean setouder2 = ouder2.setOuders(g);
             if (g == null) {
                 showDialog("Warning", "Invoer ongehuwd gezin is niet geaccepteerd");
             }
@@ -391,13 +397,14 @@ public class StamboomFXController extends StamboomController implements Initiali
 //        getAdministratie().setObservable();
 //        initComboboxes();
         
-          dbMediator.load();
+          super.loadFromDatabase();
     }
 
     
     public void saveStamboom(Event evt) {
         try
         {
+            super.initDatabaseMedium();
             File bestand = new File("file");
             Properties props = new Properties(); //Init nieuwe properties
             props.setProperty("file", bestand.getAbsolutePath()); //Zet het path correct
@@ -405,12 +412,17 @@ public class StamboomFXController extends StamboomController implements Initiali
             
             storageMediator.save(getAdministratie()); //Sla het object op
             
-            //save to database
-            dbMediator.save(getAdministratie());
+//            //save to database
+//            if (dbMediator == null)
+//            {
+//                dbMediator = new DatabaseMediator();
+//            }
+            
+            super.saveToDatabase();
         }
         catch(Exception ex)
         {
-            System.out.println(ex.toString());
+            ex.printStackTrace();
         }
        
     }

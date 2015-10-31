@@ -139,6 +139,12 @@ public class Gezin implements java.io.Serializable {
         return huwelijksdatum;
     }
 
+    public String getHwDatum()
+    {
+        Date date = huwelijksdatum.getTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        return sdf.format(date);
+    }
     /**
      * @return de datum van scheiding (kan null zijn)
      */
@@ -146,6 +152,20 @@ public class Gezin implements java.io.Serializable {
         return scheidingsdatum;
     }
 
+    public String getSdDatum()
+    {
+        if (scheidingsdatum != null)
+        {
+        Date date = scheidingsdatum.getTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        return sdf.format(date);
+        }
+        
+        else
+        {
+            return "niet gescheiden";
+        }
+    }
     /**
      * Als ouders zijn gehuwd, en er nog geen scheidingsdatum is dan wordt deze
      * geregistreerd.

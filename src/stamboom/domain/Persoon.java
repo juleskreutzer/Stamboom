@@ -1,9 +1,11 @@
 package stamboom.domain;
 
 import java.lang.Integer;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import javafx.collections.FXCollections;
@@ -47,7 +49,15 @@ public class Persoon implements java.io.Serializable {
             voornamen[i] = naam;
         }
         achternaam = anaam;
-        tussenvoegsel = tvoegsel;
+        //tussenvoegsel = tvoegsel;
+        if (tvoegsel == null)
+        {
+            tussenvoegsel = "";
+        }
+        else
+        {
+            tussenvoegsel = tvoegsel;
+        }
         gebDat = geboortedat;
         gebPlaats = geboorteplaats;
         geslacht = g;
@@ -71,9 +81,15 @@ public class Persoon implements java.io.Serializable {
      * @return de geboortedatum van deze persoon
      */
     public Calendar getGebDat() {
-        return gebDat;
+        return this.gebDat;
     }
 
+    public String getGebDatString()
+    {
+        Date date = gebDat.getTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        return sdf.format(date);
+    }
     /**
      *
      * @return de geboorteplaats van deze persoon
@@ -137,6 +153,17 @@ public class Persoon implements java.io.Serializable {
         return ouderlijkGezin;
     }
 
+    public int getGezinnr()
+    {
+        if (ouderlijkGezin == null)
+        {
+            return 0;
+        }
+        else
+        {
+            return ouderlijkGezin.getNr();
+        }
+    }
     /**
      * @return het tussenvoegsel van de naam van deze persoon (kan een lege
      * string zijn)
@@ -190,10 +217,10 @@ public class Persoon implements java.io.Serializable {
      * @param ouderlijkGezin
      * @return of ouderlijk gezin kon worden toegevoegd
      */
-    boolean setOuders(Gezin ouderlijkGezin) {
-        if(this.ouderlijkGezin == null)
+    public boolean setOuders(Gezin ouders) {
+        if(this.ouderlijkGezin == null && ouders != null)
         {
-            this.ouderlijkGezin = ouderlijkGezin;
+            this.ouderlijkGezin = ouders;
             ouderlijkGezin.breidUitMet(this);
             // OuderlijkGezin kan worden toegevoegd
             return true;
@@ -416,4 +443,6 @@ public class Persoon implements java.io.Serializable {
 
         return builder.toString();
     }
+    
+    
 }

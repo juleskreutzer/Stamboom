@@ -7,6 +7,7 @@ package stamboom.storage;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -16,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,7 +29,8 @@ public class DatabaseMediator implements IStorageMediator {
 
     private Properties props;
     private Connection conn;
-
+   
+    
     @Override
     public Administratie load() throws IOException {
         Administratie admin = new Administratie();
@@ -36,7 +39,7 @@ public class DatabaseMediator implements IStorageMediator {
         try
         {
             initConnection();
-            String query = "select * from persoon order by nr asc";
+            String query = "select nr, voornamen, tussenvoegsel, achternamen, gebdat, gebplaats, gezinnr, geslacht from persoon order by nr asc";
             Statement statement = conn.createStatement();
             ResultSet rs = statement.executeQuery(query);
             
@@ -52,7 +55,7 @@ public class DatabaseMediator implements IStorageMediator {
                 int gezinnr = rs.getInt("gezinnr");
                 String geslacht = rs.getString("geslacht");
                 
-                DateFormat formatter = new SimpleDateFormat("d-MMM-yyyy");
+                DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
                 Date date = formatter.parse(gebdat);
                 Calendar c = Calendar.getInstance();
                 c.setTime(date);
@@ -73,7 +76,7 @@ public class DatabaseMediator implements IStorageMediator {
                 admin.addPersoon(sex, vnamen, tussenvoegsel, achternaam, c, gebplaats, null);
             }
             
-            query = "select * from gezin order by nr asc";
+            query = "select nr, ouder1, ouder2, huwelijksdatum, scheidingsdatum from gezin order by nr asc";
             statement = conn.createStatement();
             rs = statement.executeQuery(query);
             
@@ -96,7 +99,7 @@ public class DatabaseMediator implements IStorageMediator {
                 if (huwdate != null)
                 {
                     huwelijk = true;
-                    DateFormat formatter = new SimpleDateFormat("d-MMM-yyyy");
+                    DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
                     huwelijkdate = formatter.parse(huwdate);
                     c = Calendar.getInstance();
                     c.setTime(huwelijkdate);
@@ -110,7 +113,7 @@ public class DatabaseMediator implements IStorageMediator {
                 if (scheiddatum != null)
                 {
                     scheiding = true;
-                    DateFormat formatter = new SimpleDateFormat("d-MMM-yyyy");
+                    DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
                     scheidingsdate = formatter.parse(scheiddatum);
                     c2 = Calendar.getInstance();
                     c2.setTime(scheidingsdate);
@@ -134,17 +137,20 @@ public class DatabaseMediator implements IStorageMediator {
                 
             }
             
-            query = "select * from persoon where ouderlijkgezin is not null";
+            query = "select nr, voornamen, tussenvoegsel, achternamen, gebdat, gebplaats, gezinnr, geslacht from persoon where gezinnr is not null";
             statement = conn.createStatement();
             rs = statement.executeQuery(query);
             
             while (rs.next()) //adding children to families
             {
                 int nr = rs.getInt("nr");
-                int gezinnr = rs.getInt("ouderlijkgezin");
+                int gezinnr = rs.getInt("gezinnr");
                 Persoon child = admin.getPersoon(nr);
                 Gezin parents = admin.getGezin(gezinnr);
+                if(gezinnr > 0)
+                {
                 admin.setOuders(child, parents);
+                }
             }
             
         } catch (SQLException | ParseException ex) {
@@ -159,30 +165,34 @@ public class DatabaseMediator implements IStorageMediator {
     public void save(Administratie admin) throws IOException {
         try {
             //todo opgave 4
-            emptyDatabase();
+            //emptyDatabase();
             initConnection();
             ArrayList<String> queries = new ArrayList<String>();
+            String query = "";
             
-            String insertIntoPersoon = "insert into persoon(nr, voornamen, tussenvoegsel, achternamen, gebdat, gebplaats, gezinnr, geslacht)\n" +
+            String insertIntoPersoon = "insert into persoon(nr, voornamen, tussenvoegsel, achternamen, gebdat, gebplaats, gezinnr, geslacht) " +
                     "values ";
-            String insertIntoGezin = "insert into gezin(nr, ouder1, ouder2, huwelijksdatum, scheidingsdatum)\n" + "values ";
+            String insertIntoGezin = "insert into gezin(nr, ouder1, ouder2, huwelijksdatum, scheidingsdatum) " + "values ";
             
             for (Persoon p : admin.getPersonen())
             {
-                String query = insertIntoPersoon + "(" + p.getNr() + ", " + p.getVoornamen() + ", " + p.getTussenvoegsel() + ", " + p.getAchternaam() + ", " + p.getGebDat() +", "+p.getGebPlaats() + ", " + p.getOuderlijkGezin() + ", " + p.getGeslacht() + ");";
+                query = insertIntoPersoon + "('" + p.getNr() + "', '" + p.getVoornamen() + "', '" + p.getTussenvoegsel() + "', '" + p.getAchternaam() + "', '" + p.getGebDatString() +"', '"+p.getGebPlaats() + "', '" + p.getGezinnr() + "' , '" + p.getGeslacht() + "')";
+                query.replace(";", "");
                 queries.add(query);
             }
             
             for(Gezin gezin : admin.getGezinnen()) {
-                String query = insertIntoGezin + "(" + gezin.getNr() + ", " + gezin.getOuder1().getNr() + ", " + gezin.getOuder2().getNr() + ", " + gezin.getHuwelijksdatum().toString() + ", " + gezin.getScheidingsdatum().toString() + ");";
+                String sdatum = gezin.getSdDatum();
+                query = insertIntoGezin + "('" + gezin.getNr() + "', '" + gezin.getOuder1().getNr() + "', '" + gezin.getOuder2().getNr() + "', '" + gezin.getHwDatum() + "', '" + gezin.getSdDatum() + "')";
+                query.replace(";", "");
                 queries.add(query);
             }
             
             for(String q: queries)
             {
                 try {
-                    Statement st = conn.createStatement();
-                    st.executeUpdate(q);
+                    PreparedStatement st = conn.prepareStatement(q);
+                    st.executeUpdate();
                 } catch (SQLException ex) {
                     System.out.print(ex.toString());
                 }
@@ -254,7 +264,6 @@ public class DatabaseMediator implements IStorageMediator {
     private void closeConnection() {
         try {
             conn.close();
-            conn = null;
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
@@ -267,8 +276,8 @@ public class DatabaseMediator implements IStorageMediator {
         Statement statement = conn.createStatement();
         statement.setQueryTimeout(30);
         
-        statement.executeUpdate("drop table if exists persoon");
-        statement.executeUpdate("drop table if exists gezin");
+        statement.executeUpdate("delete from persoon");
+        statement.executeUpdate("delete from gezin");
         
         closeConnection();
     }
