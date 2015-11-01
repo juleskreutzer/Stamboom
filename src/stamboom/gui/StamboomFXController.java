@@ -10,6 +10,8 @@ import java.net.URL;
 import java.util.Calendar;
 import java.util.Properties;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
@@ -105,13 +107,24 @@ public class StamboomFXController extends StamboomController implements Initiali
     }
 
     private void initComboboxes() {
-        cbInvoerGeslacht.setItems(FXCollections.observableArrayList(Geslacht.values()));
-        cbOuder1Invoer.setItems((ObservableList) getAdministratie().getPersonen());
-        cbOuder2Invoer.setItems((ObservableList) getAdministratie().getPersonen());
-        cbPersonen.setItems((ObservableList) getAdministratie().getPersonen());
-        cbGezin.setItems((ObservableList) getAdministratie().getGezinnen());
-        cbOuderlijkGezin.setItems((ObservableList) getAdministratie().getGezinnen());
-        cbInvoerOuderlijkGezin.setItems((ObservableList) getAdministratie().getGezinnen());
+//        cbInvoerGeslacht.setItems(FXCollections.observableArrayList(Geslacht.values()));
+//        cbOuder1Invoer.setItems((ObservableList) getAdministratie().getPersonen());
+//        cbOuder2Invoer.setItems((ObservableList) getAdministratie().getPersonen());
+//        cbPersonen.setItems((ObservableList) getAdministratie().getPersonen());
+//        cbGezin.setItems((ObservableList) getAdministratie().getGezinnen());
+//        cbOuderlijkGezin.setItems((ObservableList) getAdministratie().getGezinnen());
+//        cbInvoerOuderlijkGezin.setItems((ObservableList) getAdministratie().getGezinnen());
+        Administratie temp = this.getAdministratie();
+        this.cbPersonen.setItems((ObservableList) temp.getPersonen());
+        this.cbOuder1Invoer.setItems((ObservableList) temp.getPersonen());
+        this.cbOuder2Invoer.setItems((ObservableList) temp.getPersonen());
+        
+        this.cbOuderlijkGezin.setItems(temp.getGezinnen());
+        this.cbGezin.setItems(temp.getGezinnen());
+        
+        //PERSOON INVOER
+        this.cbInvoerGeslacht.setItems(FXCollections.observableArrayList(Geslacht.values()));
+        this.cbOuderlijkGezin.setItems(temp.getGezinnen());
     }
 
     public void selectPersoon(Event evt) {
@@ -397,7 +410,18 @@ public class StamboomFXController extends StamboomController implements Initiali
 //        getAdministratie().setObservable();
 //        initComboboxes();
         
-          super.loadFromDatabase();
+          try
+          {
+              super.loadFromDatabase();
+              Administratie a = this.getAdministratie();
+              this.initComboboxes();
+              a.getPersonen();
+          }
+          catch(IOException x)
+          {
+              Logger.getLogger(StamboomFXController.class.getName()).log(Level.SEVERE, null, x);
+          }
+                  
     }
 
     

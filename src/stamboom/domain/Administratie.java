@@ -319,8 +319,8 @@ public class Administratie implements java.io.Serializable {
 
     public List<Persoon> getPersonen() {
         //return Collections.unmodifiableList(personen);
-        observablePersonen = FXCollections.observableList(personen);
-        return (ObservableList<Persoon>)FXCollections.unmodifiableObservableList(observablePersonen);
+        return (ObservableList<Persoon>) FXCollections.unmodifiableObservableList(observablePersonen);
+
     }
 
     /**

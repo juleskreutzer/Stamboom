@@ -163,7 +163,7 @@ public class Gezin implements java.io.Serializable {
         
         else
         {
-            return "niet gescheiden";
+            return null;
         }
     }
     /**

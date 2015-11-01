@@ -73,7 +73,7 @@ public class DatabaseMediator implements IStorageMediator {
                         sex = Geslacht.MAN;
                 }
                 
-                admin.addPersoon(sex, vnamen, tussenvoegsel, achternaam, c, gebplaats, null);
+                admin.addPersoon(sex, vnamen, achternaam, tussenvoegsel, c, gebplaats, null);
             }
             
             query = "select nr, ouder1, ouder2, huwelijksdatum, scheidingsdatum from gezin order by nr asc";
@@ -96,7 +96,7 @@ public class DatabaseMediator implements IStorageMediator {
                 String huwdate = rs.getString("huwelijksdatum");
                 Date huwelijkdate = null;
                 //Check for marriage date
-                if (huwdate != null)
+                if (huwdate != null && huwdate != "")
                 {
                     huwelijk = true;
                     DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
@@ -108,9 +108,11 @@ public class DatabaseMediator implements IStorageMediator {
                 //Check for divorce
                 boolean scheiding = false;
                 Date scheidingsdate = null;
+                boolean testbool = false;
                 
                 String scheiddatum = rs.getString("scheidingsdatum");
-                if (scheiddatum != null)
+                testbool = scheiddatum.isEmpty();
+                if (scheiddatum != null && !scheiddatum.equals(""))
                 {
                     scheiding = true;
                     DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
