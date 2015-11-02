@@ -113,7 +113,7 @@ public class StamboomFXController extends StamboomController implements Initiali
 //        cbPersonen.setItems((ObservableList) getAdministratie().getPersonen());
 //        cbGezin.setItems((ObservableList) getAdministratie().getGezinnen());
 //        cbOuderlijkGezin.setItems((ObservableList) getAdministratie().getGezinnen());
-//        cbInvoerOuderlijkGezin.setItems((ObservableList) getAdministratie().getGezinnen());
+        cbInvoerOuderlijkGezin.setItems((ObservableList) getAdministratie().getGezinnen());
         Administratie temp = this.getAdministratie();
         this.cbPersonen.setItems((ObservableList) temp.getPersonen());
         this.cbOuder1Invoer.setItems((ObservableList) temp.getPersonen());
@@ -274,7 +274,7 @@ public class StamboomFXController extends StamboomController implements Initiali
         String achternaam = tfInvoerAchternaam.getText();
         String geboortePlaats = tfInvoerGeboortePlaats.getText();
         Geslacht geslacht = (Geslacht)cbInvoerGeslacht.getSelectionModel().getSelectedItem();
-        Gezin gezin = (Gezin)cbInvoerOuderlijkGezin.getSelectionModel().getSelectedItem();
+        Gezin gezin = (Gezin) this.cbInvoerOuderlijkGezin.getSelectionModel().getSelectedItem();
         Calendar geboorteDatum = null;
         
         try {
@@ -372,7 +372,7 @@ public class StamboomFXController extends StamboomController implements Initiali
     }
     
     public TreeItem<String> CreateTree(Persoon persoon, TreeItem parentBranch) {
-        TreeItem<String> branch = new TreeItem<>(persoon.getNaam());
+        TreeItem<String> branch = new TreeItem<>(persoon.standaardgegevens());
         
         if(parentBranch != null) {
             parentBranch.getChildren().add(branch);
@@ -387,7 +387,7 @@ public class StamboomFXController extends StamboomController implements Initiali
         Persoon ouder2 = persoon.getOuderlijkGezin().getOuder2();
         
         if(ouder1 != null) {
-            CreateTree(ouder1, branch);
+            CreateTree(ouder1, branch); 
         }
         
         if(ouder2 != null) {

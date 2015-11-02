@@ -243,7 +243,7 @@ public class Gezin implements java.io.Serializable {
      * @param kind
      */
     void breidUitMet(Persoon kind) {
-        if (!kinderen.contains(kind) && !this.isFamilieVan(kind)) {
+        if (!kinderen.contains(kind) && ouder1 != kind && ouder2 != kind){ // && !this.isFamilieVan(kind)) 
             kinderen.add(kind);
         }
     }
@@ -260,10 +260,10 @@ public class Gezin implements java.io.Serializable {
                 || kinderen.contains(input)) {
             return true;
         }
-
-        boolean output = this.ouder1.getOuderlijkGezin() != null
-                && this.ouder1.getOuderlijkGezin().isFamilieVan(input);
-        if (!output && this.ouder2 != null) {
+        Gezin testGezin = this.ouder1.getOuderlijkGezin();
+        boolean output = this.ouder1.getOuderlijkGezin() != null;
+                //&& this.ouder1.getOuderlijkGezin().isFamilieVan(input);
+        if (output && this.ouder2 != null) {
             output = this.ouder2.getOuderlijkGezin() != null
                     && this.ouder2.getOuderlijkGezin().isFamilieVan(input);
         }
