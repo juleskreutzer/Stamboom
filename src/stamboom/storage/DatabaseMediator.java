@@ -96,7 +96,7 @@ public class DatabaseMediator implements IStorageMediator {
                 String huwdate = rs.getString("huwelijksdatum");
                 Date huwelijkdate = null;
                 //Check for marriage date
-                if (huwdate != null && huwdate != "")
+                if (huwdate != null && huwdate != "" && huwdate != "null")
                 {
                     huwelijk = true;
                     DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
@@ -112,7 +112,7 @@ public class DatabaseMediator implements IStorageMediator {
                 
                 String scheiddatum = rs.getString("scheidingsdatum");
                 testbool = scheiddatum.isEmpty();
-                if (scheiddatum != null && !scheiddatum.equals(""))
+                if (scheiddatum != null && !scheiddatum.equals("") && !scheiddatum.equals("null"))
                 {
                     scheiding = true;
                     DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
