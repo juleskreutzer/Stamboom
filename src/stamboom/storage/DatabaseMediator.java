@@ -167,7 +167,7 @@ public class DatabaseMediator implements IStorageMediator {
     public void save(Administratie admin) throws IOException {
         try {
             //todo opgave 4
-            //emptyDatabase();
+            emptyDatabase();
             initConnection();
             ArrayList<String> queries = new ArrayList<String>();
             String query = "";
