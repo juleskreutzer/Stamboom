@@ -174,8 +174,8 @@ public class Gezin implements java.io.Serializable {
      * @return true als scheiding kan worden voltrokken, anders false
      */
     boolean setScheiding(Calendar datum) {
-        if (this.scheidingsdatum == null && huwelijksdatum != null
-                && datum.after(huwelijksdatum) && datum != null) {
+        if (huwelijksdatum != null
+                && datum.after(huwelijksdatum)) {
             this.scheidingsdatum = datum;
             return true;
         } else {
@@ -193,12 +193,14 @@ public class Gezin implements java.io.Serializable {
      * @return false als huwelijk niet mocht worden voltrokken, anders true
      */
     boolean setHuwelijk(Calendar datum) {
-        if (huwelijksdatum == null)
-        {
-            huwelijksdatum = datum;
-            return true;
-        }
-        return false;
+//        if (huwelijksdatum == null)
+//        {
+//            huwelijksdatum = datum;
+//            return true;
+//        }
+//        return false;
+        huwelijksdatum = datum;
+        return true;
     }
 
     /**

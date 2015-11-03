@@ -215,7 +215,7 @@ public class StamboomFXController extends StamboomController implements Initiali
         Gezin gezin;
         
         try {
-            gezin = getAdministratie().getGezin(Integer.parseInt(tfGezinNummer.getText()));
+            gezin = (Gezin) cbGezin.getSelectionModel().getSelectedItem();
             cal = StringUtilities.datum(tfGetrouwdOp.getText());
         }
         catch (IllegalArgumentException IAE) {
@@ -242,15 +242,23 @@ public class StamboomFXController extends StamboomController implements Initiali
         Gezin gezin;
         
         try {
-            gezin = getAdministratie().getGezin(Integer.parseInt(tfGezinNummer.getText()));
-            cal = StringUtilities.datum(tfGescheidenOp.getText());
+            gezin = (Gezin) cbGezin.getSelectionModel().getSelectedItem();
+            if ("".equals(tfGescheidenOp.getText()))
+            {
+                cal = null;
+            }
+            else
+            {
+                cal = StringUtilities.datum(tfGescheidenOp.getText());
+            }
+                   
         }
         catch (IllegalArgumentException IAE) {
             showDialog("Incorrecte Invoer", "Ongeldige datum, controleer de datum");
             return;
         }
         
-        if(gezin != null && cal != null) {
+        if(gezin != null) {
             if(getAdministratie().setScheiding(gezin, cal)) {
                 showGezin(gezin);
                 showDialog("Nieuwe datum toegevoed", "Nieuwe datum succesvol toegevoegd");
