@@ -322,8 +322,7 @@ public class StamboomFXController extends StamboomController implements Initiali
         Gezin g;
         if (huwdatum != null) {
             g = getAdministratie().addHuwelijk(ouder1, ouder2, huwdatum);
-            boolean setouder1 = ouder1.setOuders(g);
-            boolean setouder2 = ouder2.setOuders(g);
+     
             if (g == null) {
                 showDialog("Warning", "Invoer huwelijk is niet geaccepteerd");
             } else {
@@ -438,12 +437,7 @@ public class StamboomFXController extends StamboomController implements Initiali
             
             storageMediator.save(getAdministratie()); //Sla het object op
             
-//            //save to database
-//            if (dbMediator == null)
-//            {
-//                dbMediator = new DatabaseMediator();
-//            }
-            
+
             super.saveToDatabase();
         }
         catch(Exception ex)

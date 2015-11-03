@@ -233,31 +233,35 @@ public class Administratie implements java.io.Serializable {
         {
             return null;
         }
+        
+        
+        if (ouder1.isGetrouwdOp(huwdatum) || (ouder2 != null
+                && ouder2.isGetrouwdOp(huwdatum)))
+            return null;
+        
+        for(Gezin gOuder1 : ouder1.getAlsOuderBetrokkenIn())
+            if(gOuder1.getHuwelijksdatum() != null && gOuder1.getHuwelijksdatum().after(huwdatum))
+                return null;
+        
         //Nieuw gezin
         Gezin gezin = ouder1.heeftOngehuwdGezinMet(ouder2);
         
-        if(gezin != null)
-        {
-            gezin.setHuwelijk(huwdatum);
-            
-            return gezin;
-        }
-        
-        if(ouder1.kanTrouwenOp(huwdatum) && ouder2.kanTrouwenOp(huwdatum))
-        {
+        if(gezin == null) {
             gezin = new Gezin(nextGezinsNr, ouder1, ouder2);
-            gezin.setHuwelijk(huwdatum);
-            
-            gezinnen.add(gezin);
             nextGezinsNr++;
+            observableGezinnen.add(gezin);
             
-            ouder1.wordtOuderIn(gezin);
-            ouder2.wordtOuderIn(gezin);
-            
+            gezin.setHuwelijk(huwdatum);
             return gezin;
         }
         
-        return null;
+        ouder1.wordtOuderIn(gezin);
+        if(ouder2 != null)
+            ouder2.wordtOuderIn(gezin);
+        
+        gezin.setHuwelijk(huwdatum);
+
+        return gezin;
     }
 
     /**

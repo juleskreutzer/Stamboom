@@ -49,7 +49,6 @@ public class Persoon implements java.io.Serializable {
             voornamen[i] = naam;
         }
         achternaam = anaam;
-        //tussenvoegsel = tvoegsel;
         if (tvoegsel == null)
         {
             tussenvoegsel = "";
@@ -278,18 +277,17 @@ public class Persoon implements java.io.Serializable {
      * null
      */
     public Gezin heeftOngehuwdGezinMet(Persoon andereOuder) {
-        if (andereOuder == null)
-        {
-            return null;
-        }
+
+        if(andereOuder != null)
+            for(Gezin g : this.alsOuderBetrokkenIn) {
+                if(!g.isOngehuwd())
+                    return null;
+                else if(g.isOngehuwd() && 
+                        (g.getOuder1().getNr() == andereOuder.getNr() || (g.getOuder2() != null && g.getOuder2().getNr() == andereOuder.getNr()))) {
+                    return g;
+                }
+            }       
         
-        for (Gezin gezin : alsOuderBetrokkenIn)
-        {
-            if (gezin.getOuder1() == andereOuder || gezin.getOuder2() == andereOuder)
-            {
-                return gezin;
-            }
-        }
         return null;
     }
 
