@@ -19,6 +19,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import stamboom.controller.StamboomController;
@@ -353,48 +354,54 @@ public class StamboomFXController extends StamboomController implements Initiali
         clearTabGezinInvoer();
     }
 
-    
-    public void showStamboom(Event evt) {
-        if(!tfPersoonNr.getText().isEmpty()) {
-            Persoon persoon = getAdministratie().getPersoon(Integer.parseInt(tfPersoonNr.getText()));
-            
-            TreeItem<String> tree = CreateTree(persoon, null);
-            
-            TreeView treeView = new TreeView(tree);
-
-            Scene scene = new Scene(treeView, 500, 500);
-            Stage stage = new Stage();
-            stage.setTitle("Stamboom");
-            stage.setScene(scene);
-
-            stage.show();
-        }
+    public void showBoom(Event evt)
+    {
+        Persoon p = (Persoon) cbPersonen.getSelectionModel().getSelectedItem();
+        if (p == null)
+            return;
+        this.showStamboom(p);
     }
     
-    public TreeItem<String> CreateTree(Persoon persoon, TreeItem parentBranch) {
-        TreeItem<String> branch = new TreeItem<>(persoon.standaardgegevens());
-        
-        if(parentBranch != null) {
-            parentBranch.getChildren().add(branch);
-        }
-        
+    public void showStamboom(Persoon p) {
+
+            TreeItem<String> tree = new TreeItem<>("Stamboom");
+            CreateTree(p, tree);
+            
+            TreeView treeView = new TreeView();
+            treeView.setRoot(tree);
+
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setHeaderText("Stamboom van: " + p.getNaam());
+            alert.setTitle("StamboomAlert");
+            
+            alert.getDialogPane().setContent(treeView);
+            alert.showAndWait();
+    }
+    
+    void CreateTree(Persoon persoon, TreeItem parentBranch) {
+        TreeItem<String> p = new TreeItem<>(persoon.standaardgegevens());
+        parentBranch.getChildren().add(p);
+
         if(persoon.getOuderlijkGezin() == null)
         {
-            return branch;
+            return;
         }
+        
+        if (persoon.getOuderlijkGezin() == null)
+            return;
         
         Persoon ouder1 = persoon.getOuderlijkGezin().getOuder1();
         Persoon ouder2 = persoon.getOuderlijkGezin().getOuder2();
         
-        if(ouder1 != null) {
-            CreateTree(ouder1, branch); 
+        if (persoon.getOuderlijkGezin().getOuder1() != null)
+        {
+            CreateTree(persoon.getOuderlijkGezin().getOuder1(), p);
         }
         
-        if(ouder2 != null) {
-            CreateTree(ouder2, branch);
+        if (persoon.getOuderlijkGezin().getOuder2() != null)
+        {
+            CreateTree(persoon.getOuderlijkGezin().getOuder2(), p);
         }
-        
-        return branch;
     }
 
     public void createEmptyStamboom(Event evt) {
