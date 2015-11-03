@@ -381,11 +381,6 @@ public class StamboomFXController extends StamboomController implements Initiali
     void CreateTree(Persoon persoon, TreeItem parentBranch) {
         TreeItem<String> p = new TreeItem<>(persoon.standaardgegevens());
         parentBranch.getChildren().add(p);
-
-        if(persoon.getOuderlijkGezin() == null)
-        {
-            return;
-        }
         
         if (persoon.getOuderlijkGezin() == null)
             return;
